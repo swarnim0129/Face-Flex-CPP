@@ -27,6 +27,8 @@ class Student:
         self.var_gender=StringVar()
         self.var_dob=StringVar()
         self.var_address=StringVar()
+        self.var_search=StringVar()
+        self.var_searchTX=StringVar()
        
 
 
@@ -246,18 +248,18 @@ class Student:
         search_label = Label(search_frame,text="Search By:",font=("verdana",17,"bold"),fg="darkgreen",bg="white")
         search_label.grid(row=0,column=0,padx=5,pady=10,sticky=W)
 
-        search_combo=ttk.Combobox(search_frame,font=("verdana",16,"bold"),state="readonly",width=13)
-        search_combo["values"]=("Select","Roll No","Phone No")
+        search_combo=ttk.Combobox(search_frame,font=("verdana",16,"bold"),textvariable=self.var_searchTX,state="readonly",width=13)
+        search_combo["values"]=("Select","Roll No")
         search_combo.current(0)
         search_combo.grid(row=0,column=1,padx=2,pady=10,sticky=W)
 
-        search_entry = ttk.Entry(search_frame,width=13,font=("verdana",17,"bold"))
+        search_entry = ttk.Entry(search_frame,textvariable=self.var_search,width=13,font=("verdana",17,"bold"))
         search_entry.grid(row=0,column=2,padx=5,pady=10,sticky=W)
 
-        search_btn=Button(search_frame,text="Search",width=9,font=("verdana",17,"bold"),fg="black",bg="white")
+        search_btn=Button(search_frame,text="Search",width=9,command=self.search_data,font=("verdana",17,"bold"),fg="black",bg="white")
         search_btn.grid(row=0,column=3,padx=3)
 
-        showAll_btn=Button(search_frame,text="Show All",width=8,font=("verdana",17,"bold"),fg="black",bg="white")
+        showAll_btn=Button(search_frame,text="Show All",command=self.fetch_data,width=8,font=("verdana",17,"bold"),fg="black",bg="white")
         showAll_btn.grid(row=0,column=4,padx=3)
 
         #table frame
@@ -462,6 +464,41 @@ class Student:
         self.var_radio1.set("")
 
 
+        # =================================search data===========================
+
+    def search_data(self):
+        if self.var_search.get()=="" or self.var_searchTX.get()=="Select":
+            messagebox.showerror("Error","Select Combo option and enter entry box",parent=self.root)
+        else:
+            try:
+                conn = mysql.connector.connect(host="localhost", user="root", password="swarnim0129",database="face_recognizer", auth_plugin='mysql_native_password')
+                my_cursor = conn.cursor()
+                sql = "SELECT Dep,Class,Year,Semester,Name,Student_id,Gender,DOB,Email,Phone,Address,Photo from student where Roll='" +str(self.var_search.get()) + "'" 
+                my_cursor.execute(sql)
+                # my_cursor.execute("select * from student where Roll_No= " +str(self.var_search.get())+" "+str(self.var_searchTX.get())+"")
+                rows=my_cursor.fetchall()        
+                if len(rows)!=0:
+                    self.student_table.delete(*self.student_table.get_children())
+                    for i in rows:
+                        self.student_table.insert("",END,values=i)
+                        conn.commit()
+                        # messagebox.showinfo("done","done",parent=self.root)
+                    # if rows==None:
+                    #     messagebox.showerror("Error","Data Not Found",parent=self.root)
+                    #     conn.commit()
+                    # elif i==0:
+                    #     messagebox.showerror("Error","The desired data not found",parent=self.root)
+                    # else:
+                    #     pass
+                else:
+                    messagebox.showerror("Error", "Data Not Found", parent=self.root)
+
+                conn.close()
+            except Exception as es:
+                messagebox.showerror("Error",f"Due To :{str(es)}",parent=self.root)
+
+
+
 # ==========================generate dataset and photo samples================================
     def generate_dataset(self):
         if self.var_dep.get()=="Select Department"or self.var_std_name.get()=="" or self.var_std_id=="":
@@ -530,15 +567,6 @@ class Student:
 
             except Exception as es:
                 messagebox.showerror("Error", f"Due to:{str(es)}", parent=self.root)
-
-
-
-
-
-
-
-
-
 
 
  
