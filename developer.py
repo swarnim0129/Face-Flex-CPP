@@ -55,7 +55,7 @@ class Developer:
         std_b1 = Button(bg_img,image=self.std_img1,cursor="hand2")
         std_b1.place(x=200,y=240,width=220,height=220)
 
-        std_b1_1 = Button(bg_img,text="Harsh Tandel",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
+        std_b1_1 = Button(bg_img,text="Swarnim Bane",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
         std_b1_1.place(x=200, y=450, width=220, height=40)
 
         # Detect Face  button 2
@@ -66,7 +66,7 @@ class Developer:
         det_b1 = Button(bg_img,image=self.det_img1,cursor="hand2",)
         det_b1.place(x=580,y=240,width=220,height=220)
 
-        det_b1_1 = Button(bg_img,text="Swarnim Bane",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
+        det_b1_1 = Button(bg_img,text="Harsh Tandel",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
         det_b1_1.place(x=580, y=450, width=220, height=40)
 
 
@@ -78,7 +78,7 @@ class Developer:
         att_b1 = Button(bg_img,image=self.att_img1,cursor="hand2",)
         att_b1.place(x=960,y=240,width=220,height=220)
 
-        att_b1_1 = Button(bg_img,text="Athrva Sankhe",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
+        att_b1_1 = Button(bg_img,text="Atharva Sankhe",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
         att_b1_1.place(x=960, y=450, width=220, height=40)
 
 
