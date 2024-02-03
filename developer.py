@@ -76,10 +76,10 @@ class Developer:
         att_img_btn=att_img_btn.resize((230, 230))
         self.att_img1=ImageTk.PhotoImage(att_img_btn)
 
-        att_b1 = Button(bg_img,image=self.att_img1,cursor="hand2",)
+        att_b1 = Button(bg_img,image=self.att_img1,command=self.linkedin4,cursor="hand2",)
         att_b1.place(x=960,y=240,width=220,height=220)
 
-        att_b1_1 = Button(bg_img,text="Atharva Sankhe",cursor="hand2",font=("tahoma",15,"bold"),bg="white",fg="navyblue")
+        att_b1_1 = Button(bg_img,text="Atharva Sankhe",cursor="hand2",command=self.linkedin4,font=("tahoma",15,"bold"),bg="white",fg="navyblue")
         att_b1_1.place(x=960, y=450, width=220, height=40)
 
 
@@ -108,6 +108,11 @@ class Developer:
     def linkedin3(self):
             self.new = 1
             self.url = "https://www.linkedin.com/in/vedant-raut-062b9b2a6/"
+            webbrowser.open(self.url,new=self.new)
+
+    def linkedin4(self):
+            self.new = 1
+            self.url = "https://www.linkedin.com/in/atharva-sankhe-b5ba042b2/"
             webbrowser.open(self.url,new=self.new)
 
    
